@@ -28,11 +28,63 @@ Fitur ini dilengkapi autentikasi login menggunakan akun GitHub dengan NextAuth.
 ```bash
 git clone <url-repo-anda>
 cd nama-folder-proyek
+```
 
-## Deploy on Vercel
+### 2. Install Dependency
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install
+```
 
-### 2. Clone Repository
+### 3. Konfigurasi Environment (.env.local)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Buat file `.env.local` di root proyek, isi dengan:
+
+```
+GITHUB_ID=your_github_client_id
+GITHUB_SECRET=your_github_client_secret
+NEXTAUTH_SECRET=your_generated_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+📌 Petunjuk:
+
+- Dapatkan `GITHUB_ID` dan `GITHUB_SECRET` dari https://github.com/settings/developers
+- Gunakan callback URL: `http://localhost:3000/api/auth/callback/github`
+- Gunakan perintah `openssl rand -base64 32` untuk menghasilkan `NEXTAUTH_SECRET`
+
+### 4. Jalankan Server
+
+```bash
+npm run dev
+```
+
+Lalu buka di browser:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🗂️ Struktur Halaman
+
+| Halaman | Fungsi |
+|--------|--------|
+| `/` | Beranda, menampilkan daftar berita lokal |
+| `/berita/tambah` | Form tambah berita |
+| `/berita/[id]` | Detail berita lokal |
+| `/berita/[id]/edit` | Form edit berita |
+| `/berita/portal` | Berita dari portal RSS (BBC, Tempo, VOA) |
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- Next.js 14 (App Router)
+- Tailwind CSS
+- NextAuth.js (GitHub login)
+- RSS Parser
+- RESTful API Routes (Next.js API)
+
+---
